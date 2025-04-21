@@ -1,0 +1,38 @@
+# Carbon Footprint Calculator Image Recommendations
+
+To enhance the Carbon Footprint Calculator page with high-quality, SEO-friendly images, follow these guidelines:
+
+## Recommended Free Stock Image Sources:
+1. Unsplash (https://unsplash.com)
+2. Pexels (https://pexels.com)
+3. Pixabay (https://pixabay.com)
+
+## Suggested Image Searches:
+- "carbon footprint"
+- "climate change"
+- "sustainability"
+- "renewable energy"
+- "green living"
+- "environmental conservation"
+
+## Image Requirements:
+1. Hero Image: 1200x600px - A visually striking image showing environmental impact or sustainability concepts
+2. Carbon Footprint Illustration: 300x300px - An icon or illustration representing carbon footprint
+3. Global Carbon Emissions Chart: 500x500px - An informative chart showing emissions by sector
+4. Carbon Reduction Potential Chart: 500x500px - A visual representation of impact of different actions
+
+## Image Optimization for SEO:
+1. Use descriptive, keyword-rich filenames (e.g., "carbon-footprint-transportation-impact.jpg")
+2. Add comprehensive alt text that describes the image and includes relevant keywords
+3. Compress images for faster loading while maintaining quality
+4. Use responsive image techniques with the Next.js Image component
+5. Include structured data for images using ImageObject schema
+
+## Implementation Steps:
+1. Download appropriate images from the recommended sources
+2. Optimize and resize images according to the requirements
+3. Place images in the `/public/images/carbon-footprint/` directory
+4. Update the image paths in the Carbon Footprint Content component
+5. Ensure all images have proper alt text and structured data
+
+Remember that high-quality, relevant images not only improve the user experience but also contribute to better SEO performance through image search results and enhanced engagement metrics.

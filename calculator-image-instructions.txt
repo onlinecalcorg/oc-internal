@@ -1,0 +1,76 @@
+# Image Recommendations for Calculator Pages
+
+## Food Waste Reduction Calculator
+
+### Hero Image
+- Content: High-quality image of food waste or composting
+- Size: 1200x600px
+- Format: WebP (with JPG fallback)
+- Alt text: "Food waste reduction concept showing composting and sustainable food practices"
+- Placement: Background of hero section
+
+### Content Images
+1. **Meal Planning Image**
+   - Content: Person planning meals or organizing refrigerator
+   - Size: 600x400px
+   - Alt text: "Person meal planning and organizing refrigerator to reduce food waste"
+
+2. **Food Waste Statistics**
+   - Content: Infographic or visual representation of food waste statistics
+   - Size: 500x400px
+   - Alt text: "Infographic showing global food waste statistics and environmental impact"
+
+## Solar Panel Savings Calculator
+
+### Hero Image
+- Content: Solar panels on residential roof with sun shining
+- Size: 1200x600px
+- Format: WebP (with JPG fallback)
+- Alt text: "Solar panels installed on a residential roof with sun shining"
+- Placement: Background of hero section
+
+### Content Images
+1. **Solar System Components**
+   - Content: Diagram showing components of a solar panel system
+   - Size: 600x400px
+   - Alt text: "Diagram showing components of a solar panel system including panels, inverter, and electrical panel"
+
+2. **Solar Installation Process**
+   - Content: Image showing solar installation process
+   - Size: 500x400px
+   - Alt text: "Solar panel installation process on a residential roof"
+
+## Free Stock Image Resources
+
+1. **Unsplash** (https://unsplash.com)
+   - High-quality, free-to-use images
+   - Search for "food waste", "composting", "solar panels", etc.
+
+2. **Pexels** (https://pexels.com)
+   - Free stock photos and videos
+   - Good selection of environmental and sustainability images
+
+3. **Pixabay** (https://pixabay.com)
+   - Free images and royalty-free stock
+
+## Image Optimization for SEO
+
+1. **File naming**
+   - Use descriptive, keyword-rich file names
+   - Example: "food-waste-reduction-composting.webp"
+
+2. **Alt text**
+   - Include descriptive alt text for all images
+   - Include relevant keywords naturally
+
+3. **Image compression**
+   - Compress images to reduce file size without losing quality
+   - Tools: TinyPNG, Squoosh, or Next.js Image Optimization
+
+4. **Responsive images**
+   - Use the Next.js Image component for automatic optimization
+   - Provide multiple sizes for different devices
+
+5. **Structured data**
+   - Add ImageObject schema for important images
+   - Include caption, description, and other metadata

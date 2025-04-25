@@ -8,6 +8,7 @@ import { Footer } from "@/components/footer"
 import { siteConfig } from "@/lib/site-config"
 import { CurrencyProvider } from "@/contexts/currency-context"
 import { SkipToContent } from "@/components/skip-to-content"
+import Script from "next/script"
 
 const inter = Inter({ subsets: ["latin"] })
 
@@ -105,6 +106,20 @@ export const metadata: Metadata = {
 export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
     <html lang="en" suppressHydrationWarning>
+    <head>
+      <Script
+          src="https://www.googletagmanager.com/gtag/js?id=G-BJLB2TWL8B"
+          strategy="afterInteractive"
+        />
+        <Script id="gtag-init" strategy="afterInteractive">
+          {`
+            window.dataLayer = window.dataLayer || [];
+            function gtag(){dataLayer.push(arguments);}
+            gtag('js', new Date());
+            gtag('config', 'G-BJLB2TWL8B');
+          `}
+        </Script>
+    </head>
       <body className={inter.className}>
         <ThemeProvider attribute="class" defaultTheme="system" enableSystem>
           <CurrencyProvider>

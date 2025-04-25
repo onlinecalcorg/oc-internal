@@ -1,4 +1,5 @@
 import { ImageResponse } from "next/og"
+import * as math from "mathjs"
 
 // Route segment config
 export const runtime = "edge"
@@ -53,170 +54,132 @@ function decimalToFraction(decimal: number): { numerator: number; denominator: n
 export default async function Image({ params }: { params: { number: string } }) {
   try {
     // Parse the decimal from the URL
-    const decimalStr = params.number.replace(/-as-a-fraction$/, "")
-    const decimal = Number.parseFloat(decimalStr)
+    const decimal = decodeURIComponent(params.number)
+    const decimalValue = Number.parseFloat(decimal)
 
-    if (isNaN(decimal)) {
-      return new ImageResponse(
-        <div
-          style={{
-            fontSize: 48,
-            background: "linear-gradient(to bottom, #1E40AF, #0369A1)",
-            width: "100%",
-            height: "100%",
-            display: "flex",
-            alignItems: "center",
-            justifyContent: "center",
-            color: "white",
-          }}
-        >
-          Invalid Decimal
-        </div>,
-        { ...size },
-      )
-    }
+    // Get the fraction using mathjs
+    const fraction = math.fraction(decimalValue)
+    const numerator = Math.abs(fraction.n)
+    const denominator = fraction.d
+    const isNegative = decimalValue < 0
 
-    const { numerator, denominator } = decimalToFraction(decimal)
+    // Calculate the mixed number if applicable
+    const absDecimal = Math.abs(decimalValue)
+    const wholePart = Math.floor(absDecimal)
+    const fractionalPart = absDecimal - wholePart
+    const hasMixedNumber = wholePart > 0
+
+    // Get the fractional part as a fraction
+    const fractionalFraction = math.fraction(fractionalPart)
+    const fractionalNumerator = Math.abs(fractionalFraction.n)
+    const fractionalDenominator = fractionalFraction.d
 
     return new ImageResponse(
       <div
         style={{
-          fontSize: 48,
-          background: "linear-gradient(135deg, #4338CA, #6366F1)",
+          background: "linear-gradient(to bottom right, #f0f9ff, #e0f2fe)",
           width: "100%",
           height: "100%",
           display: "flex",
           flexDirection: "column",
           alignItems: "center",
           justifyContent: "center",
-          color: "white",
-          padding: "40px",
+          fontFamily: "system-ui",
         }}
       >
         <div
           style={{
-            position: "absolute",
-            top: 0,
-            left: 0,
-            right: 0,
-            bottom: 0,
-            background: "radial-gradient(circle at 70% 30%, rgba(255, 255, 255, 0.15) 0%, transparent 50%)",
-          }}
-        />
-
-        <div
-          style={{
-            position: "absolute",
-            top: 30,
-            right: 30,
-            background: "rgba(255, 255, 255, 0.2)",
-            borderRadius: "12px",
-            padding: "8px 16px",
-            fontSize: "24px",
-            fontWeight: "bold",
-          }}
-        >
-          2025 EDITION
-        </div>
-
-        <div
-          style={{
-            fontSize: "64px",
-            fontWeight: "bold",
-            marginBottom: "16px",
-            textAlign: "center",
-          }}
-        >
-          {decimal} as a Fraction
-        </div>
-
-        <div
-          style={{
             display: "flex",
+            flexDirection: "column",
             alignItems: "center",
             justifyContent: "center",
-            gap: "40px",
-            marginTop: "20px",
-            marginBottom: "40px",
+            backgroundColor: "white",
+            borderRadius: "24px",
+            padding: "40px 60px",
+            boxShadow: "0 8px 30px rgba(0, 0, 0, 0.12)",
+            width: "90%",
+            maxWidth: "900px",
           }}
         >
-          <span style={{ fontSize: "72px" }}>{decimal}</span>
-          <span style={{ fontSize: "72px" }}>=</span>
+          <div
+            style={{
+              fontSize: "32px",
+              fontWeight: "bold",
+              color: "#0f172a",
+              marginBottom: "20px",
+              textAlign: "center",
+            }}
+          >
+            Decimal to Fraction Conversion
+          </div>
+
           <div
             style={{
               display: "flex",
-              flexDirection: "column",
               alignItems: "center",
+              justifyContent: "center",
+              gap: "20px",
+              marginBottom: "30px",
             }}
           >
-            <div
-              style={{
-                fontSize: "72px",
-                textAlign: "center",
-                padding: "10px 20px",
-              }}
-            >
-              {numerator}
-            </div>
-            <div
-              style={{
-                width: "100%",
-                height: "6px",
-                backgroundColor: "white",
-                margin: "10px 0",
-              }}
-            />
-            <div
-              style={{
-                fontSize: "72px",
-                textAlign: "center",
-                padding: "10px 20px",
-              }}
-            >
-              {denominator}
+            <span style={{ fontSize: "48px", color: "#334155" }}>{decimalValue}</span>
+            <span style={{ fontSize: "48px", color: "#475569" }}>=</span>
+            <div style={{ display: "flex", flexDirection: "column", alignItems: "center" }}>
+              <div style={{ fontSize: "48px", color: "#1e293b", fontWeight: "600" }}>{numerator}</div>
+              <div
+                style={{
+                  width: "100%",
+                  height: "4px",
+                  backgroundColor: "#cbd5e1",
+                  margin: "5px 0",
+                }}
+              />
+              <div style={{ fontSize: "48px", color: "#1e293b", fontWeight: "600" }}>{denominator}</div>
             </div>
           </div>
-        </div>
 
-        <div
-          style={{
-            fontSize: "28px",
-            maxWidth: "800px",
-            textAlign: "center",
-            marginTop: "20px",
-          }}
-        >
-          Step-by-step conversion of decimal to fraction
-        </div>
+          {hasMixedNumber && (
+            <div
+              style={{
+                display: "flex",
+                alignItems: "center",
+                justifyContent: "center",
+                gap: "20px",
+                marginBottom: "30px",
+              }}
+            >
+              <span style={{ fontSize: "48px", color: "#334155" }}>{decimalValue}</span>
+              <span style={{ fontSize: "48px", color: "#475569" }}>=</span>
+              <div style={{ display: "flex", alignItems: "center" }}>
+                <span style={{ fontSize: "48px", color: "#1e293b", fontWeight: "600" }}>{wholePart}</span>
+                <div style={{ display: "flex", flexDirection: "column", alignItems: "center", marginLeft: "10px" }}>
+                  <div style={{ fontSize: "48px", color: "#1e293b", fontWeight: "600" }}>{fractionalNumerator}</div>
+                  <div
+                    style={{
+                      width: "100%",
+                      height: "4px",
+                      backgroundColor: "#cbd5e1",
+                      margin: "5px 0",
+                    }}
+                  />
+                  <div style={{ fontSize: "48px", color: "#1e293b", fontWeight: "600" }}>{fractionalDenominator}</div>
+                </div>
+              </div>
+            </div>
+          )}
 
-        <div
-          style={{
-            display: "flex",
-            alignItems: "center",
-            gap: "12px",
-            position: "absolute",
-            bottom: "30px",
-          }}
-        >
-          <svg
-            width="24"
-            height="24"
-            viewBox="0 0 24 24"
-            fill="none"
-            stroke="white"
-            strokeWidth="2"
-            strokeLinecap="round"
-            strokeLinejoin="round"
+          <div
+            style={{
+              fontSize: "18px",
+              color: "#475569",
+              marginTop: "20px",
+              textAlign: "center",
+            }}
           >
-            <rect x="2" y="2" width="20" height="20" rx="2" />
-            <path d="M8 10V16" />
-            <path d="M12 8V16" />
-            <path d="M16 12V16" />
-          </svg>
-          <span style={{ fontSize: "24px" }}>online-calculators.com</span>
+            Learn more at calculatorsuite.com
+          </div>
         </div>
       </div>,
-      // ImageResponse options
       {
         ...size,
       },

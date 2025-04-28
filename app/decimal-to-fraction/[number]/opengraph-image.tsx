@@ -1,5 +1,4 @@
 import { ImageResponse } from "next/og"
-import * as math from "mathjs"
 
 // Route segment config
 export const runtime = "edge"
@@ -51,28 +50,16 @@ function decimalToFraction(decimal: number): { numerator: number; denominator: n
 }
 
 // Image generation
-export default async function Image({ params }: { params: { number: string } }) {
+export default function Image({ params }: { params: { number: string } }) {
   try {
     // Parse the decimal from the URL
-    const decimal = decodeURIComponent(params.number)
+    const decimal = decodeURIComponent(params.number).replace(/-as-a-fraction$/, "")
     const decimalValue = Number.parseFloat(decimal)
 
-    // Get the fraction using mathjs
-    const fraction = math.fraction(decimalValue)
-    const numerator = Math.abs(fraction.n)
-    const denominator = fraction.d
-    const isNegative = decimalValue < 0
-
-    // Calculate the mixed number if applicable
-    const absDecimal = Math.abs(decimalValue)
-    const wholePart = Math.floor(absDecimal)
-    const fractionalPart = absDecimal - wholePart
-    const hasMixedNumber = wholePart > 0
-
-    // Get the fractional part as a fraction
-    const fractionalFraction = math.fraction(fractionalPart)
-    const fractionalNumerator = Math.abs(fractionalFraction.n)
-    const fractionalDenominator = fractionalFraction.d
+    // Get the fraction using our custom function
+    const fraction = decimalToFraction(decimalValue)
+    const numerator = Math.abs(fraction.numerator)
+    const denominator = fraction.denominator
 
     return new ImageResponse(
       <div
@@ -138,36 +125,6 @@ export default async function Image({ params }: { params: { number: string } }) 
             </div>
           </div>
 
-          {hasMixedNumber && (
-            <div
-              style={{
-                display: "flex",
-                alignItems: "center",
-                justifyContent: "center",
-                gap: "20px",
-                marginBottom: "30px",
-              }}
-            >
-              <span style={{ fontSize: "48px", color: "#334155" }}>{decimalValue}</span>
-              <span style={{ fontSize: "48px", color: "#475569" }}>=</span>
-              <div style={{ display: "flex", alignItems: "center" }}>
-                <span style={{ fontSize: "48px", color: "#1e293b", fontWeight: "600" }}>{wholePart}</span>
-                <div style={{ display: "flex", flexDirection: "column", alignItems: "center", marginLeft: "10px" }}>
-                  <div style={{ fontSize: "48px", color: "#1e293b", fontWeight: "600" }}>{fractionalNumerator}</div>
-                  <div
-                    style={{
-                      width: "100%",
-                      height: "4px",
-                      backgroundColor: "#cbd5e1",
-                      margin: "5px 0",
-                    }}
-                  />
-                  <div style={{ fontSize: "48px", color: "#1e293b", fontWeight: "600" }}>{fractionalDenominator}</div>
-                </div>
-              </div>
-            </div>
-          )}
-
           <div
             style={{
               fontSize: "18px",
@@ -186,6 +143,23 @@ export default async function Image({ params }: { params: { number: string } }) 
     )
   } catch (e) {
     console.error("Error generating decimal-to-fraction OG image:", e)
-    return new Response("Error generating image", { status: 500 })
+    return new ImageResponse(
+      <div
+        style={{
+          background: "white",
+          width: "100%",
+          height: "100%",
+          display: "flex",
+          alignItems: "center",
+          justifyContent: "center",
+          fontFamily: "system-ui",
+        }}
+      >
+        <div style={{ fontSize: "24px", color: "#334155" }}>Decimal to Fraction Conversion</div>
+      </div>,
+      {
+        ...size,
+      },
+    )
   }
 }

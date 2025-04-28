@@ -1,5 +1,6 @@
 import type { MetadataRoute } from "next"
 import { calculatorCategories, getAllCalculators } from "@/lib/site-config"
+import { unitCategories } from "@/lib/unit-conversion"
 
 export default function sitemap(): MetadataRoute.Sitemap {
   const baseUrl = "https://online-calculators.com"
@@ -14,6 +15,10 @@ export default function sitemap(): MetadataRoute.Sitemap {
     { url: `${baseUrl}/contact`, lastModified, changeFrequency: "monthly", priority: 0.6 },
     { url: `${baseUrl}/privacy`, lastModified, changeFrequency: "yearly", priority: 0.4 },
     { url: `${baseUrl}/terms`, lastModified, changeFrequency: "yearly", priority: 0.4 },
+
+    // Add unit converter with high priority
+    { url: `${baseUrl}/unit-converter`, lastModified, changeFrequency: "weekly", priority: 0.9 },
+    { url: `${baseUrl}/convert`, lastModified, changeFrequency: "weekly", priority: 0.9 },
 
     // Add fractions main page with high priority
     { url: `${baseUrl}/fractions`, lastModified, changeFrequency: "weekly", priority: 0.9 },
@@ -47,6 +52,52 @@ export default function sitemap(): MetadataRoute.Sitemap {
     { url: `${baseUrl}/fractions/big-number-fractions`, lastModified, changeFrequency: "weekly", priority: 0.8 },
   ]
 
+  // Unit converter category pages
+  const unitCategoryRoutes: MetadataRoute.Sitemap = unitCategories.map((category) => ({
+    url: `${baseUrl}/convert/${category.id}`,
+    lastModified,
+    changeFrequency: "weekly",
+    priority: 0.8,
+  }))
+
+  // Unit converter specific conversion pages (most popular ones)
+  const unitConversionRoutes: MetadataRoute.Sitemap = unitCategories.flatMap((category) =>
+    category.popularConversions.map(([from, to]) => ({
+      url: `${baseUrl}/convert/${category.id}/${from}/to/${to}`,
+      lastModified,
+      changeFrequency: "weekly",
+      priority: 0.8,
+    })),
+  )
+
+  // Additional high-value unit conversion pages
+  const additionalUnitConversionRoutes: MetadataRoute.Sitemap = [
+    // Length
+    { url: `${baseUrl}/convert/length/meter/to/foot`, lastModified, changeFrequency: "weekly", priority: 0.9 },
+    { url: `${baseUrl}/convert/length/inch/to/centimeter`, lastModified, changeFrequency: "weekly", priority: 0.9 },
+    { url: `${baseUrl}/convert/length/mile/to/kilometer`, lastModified, changeFrequency: "weekly", priority: 0.9 },
+
+    // Weight
+    { url: `${baseUrl}/convert/weight/kilogram/to/pound`, lastModified, changeFrequency: "weekly", priority: 0.9 },
+    { url: `${baseUrl}/convert/weight/ounce/to/gram`, lastModified, changeFrequency: "weekly", priority: 0.9 },
+    { url: `${baseUrl}/convert/weight/stone/to/kilogram`, lastModified, changeFrequency: "weekly", priority: 0.9 },
+
+    // Temperature
+    {
+      url: `${baseUrl}/convert/temperature/celsius/to/fahrenheit`,
+      lastModified,
+      changeFrequency: "weekly",
+      priority: 0.9,
+    },
+    {
+      url: `${baseUrl}/convert/temperature/fahrenheit/to/celsius`,
+      lastModified,
+      changeFrequency: "weekly",
+      priority: 0.9,
+    },
+    { url: `${baseUrl}/convert/temperature/celsius/to/kelvin`, lastModified, changeFrequency: "weekly", priority: 0.9 },
+  ]
+
   // Blog posts for SEO
   const blogPostRoutes: MetadataRoute.Sitemap = [
     {
@@ -70,6 +121,12 @@ export default function sitemap(): MetadataRoute.Sitemap {
     {
       url: `${baseUrl}/blog/retirement-planning-guide-${currentYear}`,
       lastModified: `${currentYear}-02-15T00:00:00.000Z`,
+      changeFrequency: "monthly",
+      priority: 0.7,
+    },
+    {
+      url: `${baseUrl}/blog/unit-conversion-guide-${currentYear}`,
+      lastModified: `${currentYear}-03-01T00:00:00.000Z`,
       changeFrequency: "monthly",
       priority: 0.7,
     },
@@ -101,6 +158,12 @@ export default function sitemap(): MetadataRoute.Sitemap {
       changeFrequency: "monthly",
       priority: 0.9,
     },
+    {
+      url: `${baseUrl}/unit-converter-${currentYear}`,
+      lastModified: `${currentYear}-01-01T00:00:00.000Z`,
+      changeFrequency: "monthly",
+      priority: 0.9,
+    },
   ]
 
   return [
@@ -108,6 +171,9 @@ export default function sitemap(): MetadataRoute.Sitemap {
     ...categoryRoutes,
     ...calculatorRoutes,
     ...fractionCalculatorRoutes,
+    ...unitCategoryRoutes,
+    ...unitConversionRoutes,
+    ...additionalUnitConversionRoutes,
     ...blogPostRoutes,
     ...yearSpecificRoutes,
   ]

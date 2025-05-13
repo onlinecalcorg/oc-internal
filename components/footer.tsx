@@ -16,7 +16,7 @@ export function Footer() {
   return (
     <footer className="border-t bg-background">
       <div className="container py-12 md:py-16">
-        <div className="grid grid-cols-1 gap-8 md:grid-cols-2 lg:grid-cols-4">
+        <div className="grid grid-cols-1 gap-8 md:grid-cols-2 lg:grid-cols-5">
           <div className="space-y-4">
             <div className="flex items-center gap-2">
               <Calculator className="h-6 w-6 text-trust-primary" />
@@ -165,6 +165,66 @@ export function Footer() {
                   )),
                 )
                 .slice(0, 8)}
+            </ul>
+          </div>
+
+          <div className="space-y-4">
+            <h3 className="text-sm font-semibold uppercase tracking-wider text-trust-primary">Unit Converters</h3>
+            <ul className="space-y-3">
+              <li>
+                <Link
+                  href="/convert/length"
+                  className="flex items-center gap-2 text-sm text-muted-foreground hover:text-trust-primary transition-colors"
+                >
+                  <LucideIcon name="ruler" className="h-4 w-4" />
+                  Length Converter
+                </Link>
+              </li>
+              <li>
+                <Link
+                  href="/convert/weight"
+                  className="flex items-center gap-2 text-sm text-muted-foreground hover:text-trust-primary transition-colors"
+                >
+                  <LucideIcon name="weight" className="h-4 w-4" />
+                  Weight Converter
+                </Link>
+              </li>
+              <li>
+                <Link
+                  href="/convert/temperature"
+                  className="flex items-center gap-2 text-sm text-muted-foreground hover:text-trust-primary transition-colors"
+                >
+                  <LucideIcon name="thermometer" className="h-4 w-4" />
+                  Temperature Converter
+                </Link>
+              </li>
+              <li>
+                <Link
+                  href="/convert/volume"
+                  className="flex items-center gap-2 text-sm text-muted-foreground hover:text-trust-primary transition-colors"
+                >
+                  <LucideIcon name="flask" className="h-4 w-4" />
+                  Volume Converter
+                </Link>
+              </li>
+              <li>
+                <Link
+                  href="/convert/area"
+                  className="flex items-center gap-2 text-sm text-muted-foreground hover:text-trust-primary transition-colors"
+                >
+                  <LucideIcon name="square" className="h-4 w-4" />
+                  Area Converter
+                </Link>
+              </li>
+              <li>
+                <Link
+                  href="/unit-converter"
+                  className="flex items-center gap-2 text-sm text-muted-foreground hover:text-trust-primary transition-colors"
+                >
+                  <LucideIcon name="arrow-right" className="h-4 w-4" />
+                  All Unit Converters
+                </Link>
+              </li>
             </ul>
           </div>
 

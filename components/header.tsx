@@ -27,6 +27,52 @@ export function Header() {
             <Link href="/calculators" className="transition-colors hover:text-foreground/80 text-foreground/60">
               Calculators
             </Link>
+            <div className="relative group">
+              <button className="flex items-center gap-1 transition-colors hover:text-foreground/80 text-foreground/60">
+                Unit Converters
+                <LucideIcon name="chevron-down" className="h-4 w-4" />
+              </button>
+              <div className="absolute left-0 top-full z-50 mt-2 hidden w-64 rounded-md border bg-background shadow-md group-hover:block">
+                <div className="grid grid-cols-1 gap-1 p-2">
+                  <Link
+                    href="/unit-converter"
+                    className="flex items-center gap-2 rounded-md px-3 py-2 text-sm hover:bg-muted"
+                  >
+                    <LucideIcon name="arrow-right" className="h-4 w-4 text-trust-primary" />
+                    <span>All Unit Converters</span>
+                  </Link>
+                  <div className="my-1 border-t"></div>
+                  <Link
+                    href="/convert/length"
+                    className="flex items-center gap-2 rounded-md px-3 py-2 text-sm hover:bg-muted"
+                  >
+                    <LucideIcon name="ruler" className="h-4 w-4 text-trust-primary" />
+                    <span>Length Converter</span>
+                  </Link>
+                  <Link
+                    href="/convert/weight"
+                    className="flex items-center gap-2 rounded-md px-3 py-2 text-sm hover:bg-muted"
+                  >
+                    <LucideIcon name="weight" className="h-4 w-4 text-trust-primary" />
+                    <span>Weight Converter</span>
+                  </Link>
+                  <Link
+                    href="/convert/temperature"
+                    className="flex items-center gap-2 rounded-md px-3 py-2 text-sm hover:bg-muted"
+                  >
+                    <LucideIcon name="thermometer" className="h-4 w-4 text-trust-primary" />
+                    <span>Temperature Converter</span>
+                  </Link>
+                  <Link
+                    href="/convert/volume"
+                    className="flex items-center gap-2 rounded-md px-3 py-2 text-sm hover:bg-muted"
+                  >
+                    <LucideIcon name="flask" className="h-4 w-4 text-trust-primary" />
+                    <span>Volume Converter</span>
+                  </Link>
+                </div>
+              </div>
+            </div>
             <Link href="/about" className="transition-colors hover:text-foreground/80 text-foreground/60">
               About
             </Link>
@@ -95,6 +141,14 @@ export function Header() {
                   >
                     <LucideIcon name="calculator" className="h-5 w-5" />
                     Calculators
+                  </Link>
+                  <Link
+                    href="/unit-converter"
+                    className="flex items-center gap-2 text-foreground/80 hover:text-foreground"
+                    onClick={() => document.body.click()} // Close sheet
+                  >
+                    <LucideIcon name="ruler" className="h-5 w-5" />
+                    Unit Converters
                   </Link>
                   <Link
                     href="/about"

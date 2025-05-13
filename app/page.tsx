@@ -504,6 +504,97 @@ export default function HomePage() {
         </div>
       </section>
 
+      {/* Popular Unit Converters Section */}
+      <section className="container px-4 py-12 md:py-16 md:px-6">
+        <div className="flex flex-col items-center justify-center space-y-4 text-center">
+          <Badge className="px-3.5 py-1.5 text-sm font-medium" variant="secondary">
+            Unit Converters
+          </Badge>
+          <h2 className="text-2xl font-bold tracking-tight md:text-3xl">Popular Unit Converters</h2>
+          <p className="mx-auto max-w-[700px] text-muted-foreground">
+            Quick access to our most frequently used unit conversion tools
+          </p>
+        </div>
+
+        <div className="mt-8 grid gap-6 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4">
+          {[
+            {
+              title: "Length Converter",
+              description: "Convert between meters, feet, inches, kilometers, miles, and more",
+              icon: "ruler",
+              slug: "convert/length",
+              popular: ["meter/to/foot", "kilometer/to/mile", "inch/to/centimeter"],
+            },
+            {
+              title: "Weight Converter",
+              description: "Convert between kilograms, pounds, ounces, grams, and more",
+              icon: "weight",
+              slug: "convert/weight",
+              popular: ["kilogram/to/pound", "gram/to/ounce", "pound/to/kilogram"],
+            },
+            {
+              title: "Temperature Converter",
+              description: "Convert between Celsius, Fahrenheit, and Kelvin temperature scales",
+              icon: "thermometer",
+              slug: "convert/temperature",
+              popular: ["celsius/to/fahrenheit", "fahrenheit/to/celsius", "celsius/to/kelvin"],
+            },
+            {
+              title: "Volume Converter",
+              description: "Convert between liters, gallons, cups, milliliters, and more",
+              icon: "flask",
+              slug: "convert/volume",
+              popular: ["liter/to/gallon", "milliliter/to/ounce", "cup/to/milliliter"],
+            },
+          ].map((converter) => (
+            <Card
+              key={converter.slug}
+              className="h-full overflow-hidden transition-all hover:border-trust-primary/50 hover:shadow-md"
+            >
+              <CardHeader className="p-4 pb-0">
+                <div className="flex items-start justify-between">
+                  <div className="rounded-full bg-trust-primary/10 p-2.5">
+                    <LucideIcon name={converter.icon} className="h-5 w-5 text-trust-primary" />
+                  </div>
+                </div>
+              </CardHeader>
+              <CardContent className="p-4 pt-4">
+                <CardTitle className="line-clamp-1 text-xl">{converter.title}</CardTitle>
+                <CardDescription className="line-clamp-2 mt-2 min-h-[40px]">{converter.description}</CardDescription>
+              </CardContent>
+              <CardFooter className="p-4 pt-0 flex flex-col items-start">
+                <div className="w-full mb-3">
+                  <div className="text-xs font-medium text-muted-foreground mb-2">Popular conversions:</div>
+                  <div className="space-y-1">
+                    {converter.popular.map((conversion) => (
+                      <Link
+                        key={conversion}
+                        href={`/${converter.slug}/${conversion}`}
+                        className="text-xs text-trust-primary hover:underline block"
+                      >
+                        {conversion.split("/to/").join(" to ").replace(/-/g, " ")}
+                      </Link>
+                    ))}
+                  </div>
+                </div>
+                <Link href={`/${converter.slug}`} className="text-sm font-medium text-trust-primary hover:underline">
+                  View all {converter.title.toLowerCase()} options
+                </Link>
+              </CardFooter>
+            </Card>
+          ))}
+        </div>
+
+        <div className="mt-8 text-center">
+          <Link href="/unit-converter">
+            <Button className="gap-1.5">
+              Explore All Unit Converters
+              <ArrowRight className="h-4 w-4" />
+            </Button>
+          </Link>
+        </div>
+      </section>
+
       {/* CTA Section */}
       <section className="container px-4 py-12 md:py-16 md:px-6">
         <div className="relative overflow-hidden rounded-lg border bg-background p-8 shadow-lg md:p-12">

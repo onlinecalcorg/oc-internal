@@ -16,6 +16,8 @@ import {
   BreadcrumbSeparator,
 } from "@/components/ui/breadcrumb"
 import Link from "next/link"
+// Add the import for the FloatingActionButton
+import { FloatingActionButton } from "@/components/converters/floating-action-button"
 
 interface SpecificConverterClientProps {
   category: string
@@ -288,6 +290,12 @@ export default function SpecificConverterClient({ category, fromUnit, toUnit }: 
           </div>
         </CardContent>
       </Card>
+
+      {/* Add this at the end, just before the closing div */}
+      <FloatingActionButton
+        result={result !== null ? `${formatResult(result)} ${toUnitData.symbol}` : null}
+        onCopy={handleCopyResult}
+      />
     </div>
   )
 }

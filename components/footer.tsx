@@ -169,7 +169,7 @@ export function Footer() {
           </div>
 
           <div className="space-y-4">
-            <h3 className="text-sm font-semibold uppercase tracking-wider text-trust-primary">Unit Converters</h3>
+            <h3 className="text-sm font-semibold uppercase tracking-wider text-trust-primary">Converters</h3>
             <ul className="space-y-3">
               <li>
                 <Link
@@ -191,29 +191,29 @@ export function Footer() {
               </li>
               <li>
                 <Link
+                  href="/currency/dollars-to-rupees"
+                  className="flex items-center gap-2 text-sm text-muted-foreground hover:text-trust-primary transition-colors"
+                >
+                  <LucideIcon name="dollar-sign" className="h-4 w-4" />
+                  USD to INR Converter
+                </Link>
+              </li>
+              <li>
+                <Link
+                  href="/currency/250-dollars-in-rupees"
+                  className="flex items-center gap-2 text-sm text-muted-foreground hover:text-trust-primary transition-colors"
+                >
+                  <LucideIcon name="calculator" className="h-4 w-4" />
+                  250 Dollars in Rupees
+                </Link>
+              </li>
+              <li>
+                <Link
                   href="/convert/temperature"
                   className="flex items-center gap-2 text-sm text-muted-foreground hover:text-trust-primary transition-colors"
                 >
                   <LucideIcon name="thermometer" className="h-4 w-4" />
                   Temperature Converter
-                </Link>
-              </li>
-              <li>
-                <Link
-                  href="/convert/volume"
-                  className="flex items-center gap-2 text-sm text-muted-foreground hover:text-trust-primary transition-colors"
-                >
-                  <LucideIcon name="flask" className="h-4 w-4" />
-                  Volume Converter
-                </Link>
-              </li>
-              <li>
-                <Link
-                  href="/convert/area"
-                  className="flex items-center gap-2 text-sm text-muted-foreground hover:text-trust-primary transition-colors"
-                >
-                  <LucideIcon name="square" className="h-4 w-4" />
-                  Area Converter
                 </Link>
               </li>
               <li>

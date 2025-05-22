@@ -23,20 +23,20 @@ export function generateMetadata({ params }: PageProps): Metadata {
   // If params.amount is undefined, provide default metadata
   if (!params.amount) {
     return {
-      title: "Dollars to Rupees Converter | Currency Exchange Calculator",
+      title: "USD to INR Converter | Dollar to Rupee Exchange Rate Calculator",
       description:
         "Convert US Dollars (USD) to Indian Rupees (INR) with our free currency converter. Get accurate and up-to-date exchange rates.",
     }
   }
 
   // Parse the amount from the URL
-  const amount = Number.parseFloat(params.amount.replace(/-/g, "."))
+  const amount = Number.parseFloat(params.amount)
 
   // Calculate the conversion
   const inrAmount = (amount * EXCHANGE_RATE).toFixed(2)
 
   return {
-    title: `${amount} USD to INR | ${amount} Dollars in Rupees (₹${inrAmount})`,
+    title: `${amount} USD to INR | ${amount} Dollars to Rupees (₹${inrAmount})`,
     description: `Convert ${amount} US Dollars to Indian Rupees. ${amount} USD equals ₹${inrAmount} INR based on today's exchange rate. Free currency calculator with live rates.`,
     keywords: [
       `${amount} dollars in rupees`,
@@ -56,11 +56,11 @@ export function generateMetadata({ params }: PageProps): Metadata {
       "dollar rate today",
     ],
     openGraph: {
-      title: `${amount} USD to INR | ${amount} Dollars in Rupees`,
+      title: `${amount} USD to INR | ${amount} Dollars to Rupees`,
       description: `${amount} US Dollars = ₹${inrAmount} Indian Rupees. Live exchange rate calculator and currency conversion guide.`,
       type: "website",
       locale: "en_US",
-      url: `https://calculatorsuite.vercel.app/currency/${amount}-dollars-in-rupees`,
+      url: `https://calculatorsuite.vercel.app/usd-to-inr/convert/${amount}`,
       images: [
         {
           url: `https://calculatorsuite.vercel.app/api/og?title=${amount}+USD+to+INR&subtitle=${amount}+Dollars+%3D+%E2%82%B9${inrAmount}+Rupees`,
@@ -72,7 +72,7 @@ export function generateMetadata({ params }: PageProps): Metadata {
     },
     twitter: {
       card: "summary_large_image",
-      title: `${amount} USD to INR | ${amount} Dollars in Rupees`,
+      title: `${amount} USD to INR | ${amount} Dollars to Rupees`,
       description: `${amount} US Dollars = ₹${inrAmount} Indian Rupees. Live exchange rate calculator.`,
       images: [
         `https://calculatorsuite.vercel.app/api/og?title=${amount}+USD+to+INR&subtitle=${amount}+Dollars+%3D+%E2%82%B9${inrAmount}+Rupees`,
@@ -88,7 +88,7 @@ export default function DollarToRupeePage({ params }: PageProps) {
   }
 
   // Parse the amount from the URL
-  const amount = Number.parseFloat(params.amount.replace(/-/g, "."))
+  const amount = Number.parseFloat(params.amount)
 
   // If amount is not a valid number, redirect to the list page
   if (isNaN(amount)) {
@@ -96,14 +96,17 @@ export default function DollarToRupeePage({ params }: PageProps) {
   }
 
   // Redirect to the new URL structure
-  redirect(`/usd-to-inr/convert/${amount}`)
+  redirect(`/convert-usd-to-inr/${params.amount}`)
+
+  // Calculate the conversion
+  const inrAmount = (amount * EXCHANGE_RATE).toFixed(2)
 
   // Generate schema.org JSON-LD
   const schemaData = {
     "@context": "https://schema.org",
     "@type": "WebPage",
-    name: `${amount} USD to INR | ${amount} Dollars in Rupees`,
-    description: `Convert ${amount} US Dollars to Indian Rupees. ${amount} USD equals ₹${amount * EXCHANGE_RATE} INR based on today's exchange rate.`,
+    name: `${amount} USD to INR | ${amount} Dollars to Rupees`,
+    description: `Convert ${amount} US Dollars to Indian Rupees. ${amount} USD equals ₹${inrAmount} INR based on today's exchange rate.`,
     dateModified: new Date().toISOString(),
     mainEntity: [
       {
@@ -114,7 +117,7 @@ export default function DollarToRupeePage({ params }: PageProps) {
             name: `How much is ${amount} USD in Indian Rupees?`,
             acceptedAnswer: {
               "@type": "Answer",
-              text: `${amount} US Dollars equals ₹${amount * EXCHANGE_RATE} Indian Rupees at the current exchange rate of 1 USD = ₹${EXCHANGE_RATE}.`,
+              text: `${amount} US Dollars equals ₹${inrAmount} Indian Rupees at the current exchange rate of 1 USD = ₹${EXCHANGE_RATE}.`,
             },
           },
           {
@@ -148,13 +151,13 @@ export default function DollarToRupeePage({ params }: PageProps) {
             "@type": "ListItem",
             position: 2,
             name: "USD to INR",
-            item: "https://calculatorsuite.vercel.app/currency/dollars-to-rupees",
+            item: "https://calculatorsuite.vercel.app/usd-to-inr",
           },
           {
             "@type": "ListItem",
             position: 3,
             name: `${amount} USD to INR`,
-            item: `https://calculatorsuite.vercel.app/currency/${amount}-dollars-in-rupees`,
+            item: `https://calculatorsuite.vercel.app/usd-to-inr/convert/${amount}`,
           },
         ],
       },
@@ -168,11 +171,11 @@ export default function DollarToRupeePage({ params }: PageProps) {
   const specificQuestions = [
     {
       question: `How much is ${amount} USD in Indian Rupees?`,
-      answer: `As of today, ${amount} US Dollars equals ₹${amount * EXCHANGE_RATE} Indian Rupees based on the current exchange rate of 1 USD = ₹${EXCHANGE_RATE}. This conversion uses the latest market rates, but actual rates at banks or money changers may vary slightly due to fees and margins.`,
+      answer: `As of today, ${amount} US Dollars equals ₹${inrAmount} Indian Rupees based on the current exchange rate of 1 USD = ₹${EXCHANGE_RATE}. This conversion uses the latest market rates, but actual rates at banks or money changers may vary slightly due to fees and margins.`,
     },
     {
       question: `Is ${amount} USD a lot of money in India?`,
-      answer: `${amount} USD (approximately ₹${amount * EXCHANGE_RATE}) in India can have different purchasing power depending on the context. In major cities like Mumbai or Delhi, it might cover ${
+      answer: `${amount} USD (approximately ₹${inrAmount}) in India can have different purchasing power depending on the context. In major cities like Mumbai or Delhi, it might cover ${
         amount < 50
           ? "a nice meal for two at a casual restaurant"
           : amount < 200
@@ -184,7 +187,7 @@ export default function DollarToRupeePage({ params }: PageProps) {
     },
     {
       question: `How has the value of ${amount} USD to INR changed over time?`,
-      answer: `The value of ${amount} USD in Indian Rupees has changed significantly over the years due to fluctuating exchange rates. Five years ago, ${amount} USD would have been worth approximately ₹${amount * 70}, and ten years ago around ₹${amount * 60}. This demonstrates the general trend of the Indian Rupee depreciating against the US Dollar over time, influenced by factors like inflation differentials, interest rates, and economic growth patterns between the two countries.`,
+      answer: `The value of ${amount} USD in Indian Rupees has changed significantly over the years due to fluctuating exchange rates. Five years ago, ${amount} USD would have been worth approximately ₹${(amount * 70).toFixed(2)}, and ten years ago around ₹${(amount * 60).toFixed(2)}. This demonstrates the general trend of the Indian Rupee depreciating against the US Dollar over time, influenced by factors like inflation differentials, interest rates, and economic growth patterns between the two countries.`,
     },
   ]
 
@@ -197,11 +200,11 @@ export default function DollarToRupeePage({ params }: PageProps) {
         </BreadcrumbItem>
         <BreadcrumbSeparator />
         <BreadcrumbItem>
-          <BreadcrumbLink href="/currency/dollars-to-rupees">USD to INR</BreadcrumbLink>
+          <BreadcrumbLink href="/usd-to-inr">USD to INR</BreadcrumbLink>
         </BreadcrumbItem>
         <BreadcrumbSeparator />
         <BreadcrumbItem>
-          <BreadcrumbLink href={`/currency/${amount}-dollars-in-rupees`} isCurrentPage>
+          <BreadcrumbLink href={`/usd-to-inr/convert/${amount}`} isCurrentPage>
             {amount} USD to INR
           </BreadcrumbLink>
         </BreadcrumbItem>
@@ -214,7 +217,7 @@ export default function DollarToRupeePage({ params }: PageProps) {
         <div className="md:col-span-2">
           <div className="flex flex-col md:flex-row md:items-center md:justify-between gap-2 mb-4">
             <h1 className="text-3xl font-bold tracking-tight md:text-4xl">
-              {amount} USD to INR | {amount} Dollars in Rupees
+              {amount} USD to INR | {amount} Dollars to Rupees
             </h1>
             <Badge variant="outline" className="w-fit">
               Updated Today
@@ -223,7 +226,7 @@ export default function DollarToRupeePage({ params }: PageProps) {
 
           <div className="text-xl text-muted-foreground mb-8 flex flex-wrap items-center gap-2">
             <span className="font-medium text-foreground">
-              {amount} US Dollars = ₹{amount * EXCHANGE_RATE} Indian Rupees
+              {amount} US Dollars = ₹{inrAmount} Indian Rupees
             </span>
             <span className="text-sm">(1 USD = ₹{EXCHANGE_RATE})</span>
           </div>
@@ -248,8 +251,8 @@ export default function DollarToRupeePage({ params }: PageProps) {
               </p>
 
               <p>
-                With {amount} USD, you can get approximately ₹{amount * EXCHANGE_RATE} INR. This amount in Indian Rupees
-                could be used for:
+                With {amount} USD, you can get approximately ₹{inrAmount} INR. This amount in Indian Rupees could be
+                used for:
               </p>
 
               <ul>
@@ -307,7 +310,7 @@ export default function DollarToRupeePage({ params }: PageProps) {
               <div className="bg-muted p-4 rounded-md font-mono text-center mb-4 overflow-x-auto">
                 <span className="text-green-600">{amount} USD</span> ×{" "}
                 <span className="text-blue-600">{EXCHANGE_RATE}</span> ={" "}
-                <span className="text-trust-primary">₹{amount * EXCHANGE_RATE} INR</span>
+                <span className="text-trust-primary">₹{inrAmount} INR</span>
               </div>
 
               <p>
@@ -408,7 +411,7 @@ export default function DollarToRupeePage({ params }: PageProps) {
               {relatedAmounts.map((relatedAmount) => (
                 <Link
                   key={relatedAmount}
-                  href={`/currency/${relatedAmount}-dollars-in-rupees`}
+                  href={`/usd-to-inr/convert/${relatedAmount}`}
                   className="flex items-center p-3 border rounded-md hover:bg-muted transition-colors"
                 >
                   <div className="mr-2 flex-shrink-0">
@@ -421,7 +424,7 @@ export default function DollarToRupeePage({ params }: PageProps) {
                 </Link>
               ))}
               <Link
-                href="/currency/dollars-to-rupees"
+                href="/usd-to-inr"
                 className="flex items-center p-3 border rounded-md hover:bg-muted transition-colors"
               >
                 <div className="mr-2 flex-shrink-0">
@@ -471,7 +474,7 @@ export default function DollarToRupeePage({ params }: PageProps) {
                 (searchAmount) => (
                   <Link
                     key={searchAmount}
-                    href={`/currency/${searchAmount}-dollars-in-rupees`}
+                    href={`/usd-to-inr/convert/${searchAmount}`}
                     className="text-sm p-2 border rounded hover:bg-muted transition-colors flex items-center justify-between"
                   >
                     <span>${searchAmount}</span>

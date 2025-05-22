@@ -16,7 +16,7 @@ import { Separator } from "@/components/ui/separator"
 const EXCHANGE_RATE = 83.12 // 1 USD = 83.12 INR (example rate)
 
 export const metadata: Metadata = {
-  title: "USD to INR Converter | Dollars to Rupees Exchange Rate Calculator",
+  title: "USD to INR Converter | Dollar to Rupee Exchange Rate Calculator",
   description:
     "Convert US Dollars (USD) to Indian Rupees (INR) with our free currency converter. Get accurate and up-to-date exchange rates for USD to INR conversions.",
   keywords: [
@@ -38,16 +38,16 @@ export const metadata: Metadata = {
     "currency exchange near me",
     "how much is dollar in rupees",
     "dollar rate in india today",
-    "dollar to inr chart",
-    "dollar to inr trend",
+    "dollar to rupee chart",
+    "dollar to rupee trend",
   ],
   openGraph: {
-    title: "USD to INR Converter | Dollars to Rupees Exchange Rate Calculator",
+    title: "USD to INR Converter | Dollar to Rupee Exchange Rate Calculator",
     description:
       "Convert US Dollars (USD) to Indian Rupees (INR) with our free currency converter. Get accurate and up-to-date exchange rates.",
     type: "website",
     locale: "en_US",
-    url: "https://calculatorsuite.vercel.app/currency/dollars-to-rupees",
+    url: "https://calculatorsuite.vercel.app/usd-to-inr",
     images: [
       {
         url: "https://calculatorsuite.vercel.app/api/og?title=USD+to+INR+Converter&subtitle=Convert+Dollars+to+Rupees",
@@ -59,14 +59,14 @@ export const metadata: Metadata = {
   },
   twitter: {
     card: "summary_large_image",
-    title: "USD to INR Converter | Dollars to Rupees Exchange Rate Calculator",
+    title: "USD to INR Converter | Dollar to Rupee Exchange Rate Calculator",
     description: "Convert US Dollars (USD) to Indian Rupees (INR) with our free currency converter.",
     images: ["https://calculatorsuite.vercel.app/api/og?title=USD+to+INR+Converter&subtitle=Convert+Dollars+to+Rupees"],
   },
 }
 
-export default function DollarsToRupeesPage() {
-  redirect("/usd-to-inr")
+export default function UsdToInrPage() {
+  redirect("/convert-usd-to-inr")
 
   // Common USD amounts to convert
   const commonAmounts = [1, 5, 10, 20, 50, 100, 200, 250, 500, 1000, 2000, 5000, 10000]
@@ -87,7 +87,7 @@ export default function DollarsToRupeesPage() {
   const schemaData = {
     "@context": "https://schema.org",
     "@type": "WebPage",
-    name: "USD to INR Converter | Dollars to Rupees Exchange Rate Calculator",
+    name: "USD to INR Converter | Dollar to Rupee Exchange Rate Calculator",
     description:
       "Convert US Dollars (USD) to Indian Rupees (INR) with our free currency converter. Get accurate and up-to-date exchange rates.",
     dateModified: new Date().toISOString(),
@@ -150,7 +150,7 @@ export default function DollarsToRupeesPage() {
             "@type": "ListItem",
             position: 2,
             name: "USD to INR",
-            item: "https://calculatorsuite.vercel.app/currency/dollars-to-rupees",
+            item: "https://calculatorsuite.vercel.app/usd-to-inr",
           },
         ],
       },
@@ -166,7 +166,7 @@ export default function DollarsToRupeesPage() {
         </BreadcrumbItem>
         <BreadcrumbSeparator />
         <BreadcrumbItem>
-          <BreadcrumbLink href="/currency/dollars-to-rupees" isCurrentPage>
+          <BreadcrumbLink href="/usd-to-inr" isCurrentPage>
             USD to INR
           </BreadcrumbLink>
         </BreadcrumbItem>
@@ -178,7 +178,7 @@ export default function DollarsToRupeesPage() {
       <div className="grid gap-8 md:grid-cols-3">
         <div className="md:col-span-2">
           <div className="flex flex-col md:flex-row md:items-center md:justify-between gap-2 mb-4">
-            <h1 className="text-3xl font-bold tracking-tight md:text-4xl">USD to INR Converter | Dollars to Rupees</h1>
+            <h1 className="text-3xl font-bold tracking-tight md:text-4xl">USD to INR Converter | Dollar to Rupee</h1>
             <Badge variant="outline" className="w-fit">
               Live Rates
             </Badge>
@@ -199,7 +199,7 @@ export default function DollarsToRupeesPage() {
               {commonAmounts.map((amount) => (
                 <Link
                   key={amount}
-                  href={`/currency/${amount}-dollars-in-rupees`}
+                  href={`/usd-to-inr/convert/${amount}`}
                   className="flex flex-col p-4 border rounded-md hover:bg-muted transition-colors"
                 >
                   <div className="flex items-center mb-2">
@@ -337,7 +337,7 @@ export default function DollarsToRupeesPage() {
                   {[1, 5, 10, 20, 50, 100, 200, 250, 500, 1000, 2000, 5000].map((amount) => (
                     <Link
                       key={amount}
-                      href={`/currency/${amount}-dollars-in-rupees`}
+                      href={`/usd-to-inr/convert/${amount}`}
                       className="text-center p-2 border rounded hover:bg-muted transition-colors"
                     >
                       ${amount}
@@ -450,21 +450,21 @@ export default function DollarsToRupeesPage() {
                   <h3 className="text-sm font-medium mb-2">Quick Links</h3>
                   <div className="space-y-2">
                     <Link
-                      href="/currency/250-dollars-in-rupees"
+                      href="/usd-to-inr/convert/250"
                       className="flex items-center p-2 text-sm hover:bg-muted rounded-md transition-colors"
                     >
                       <Calculator className="h-4 w-4 mr-2 text-trust-primary" />
                       <span>250 USD to INR</span>
                     </Link>
                     <Link
-                      href="/currency/100-dollars-in-rupees"
+                      href="/usd-to-inr/convert/100"
                       className="flex items-center p-2 text-sm hover:bg-muted rounded-md transition-colors"
                     >
                       <Calculator className="h-4 w-4 mr-2 text-trust-primary" />
                       <span>100 USD to INR</span>
                     </Link>
                     <Link
-                      href="/currency/1000-dollars-in-rupees"
+                      href="/usd-to-inr/convert/1000"
                       className="flex items-center p-2 text-sm hover:bg-muted rounded-md transition-colors"
                     >
                       <Calculator className="h-4 w-4 mr-2 text-trust-primary" />

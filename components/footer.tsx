@@ -191,7 +191,7 @@ export function Footer() {
               </li>
               <li>
                 <Link
-                  href="/currency/dollars-to-rupees"
+                  href="/convert-usd-to-inr"
                   className="flex items-center gap-2 text-sm text-muted-foreground hover:text-trust-primary transition-colors"
                 >
                   <LucideIcon name="dollar-sign" className="h-4 w-4" />
@@ -200,7 +200,7 @@ export function Footer() {
               </li>
               <li>
                 <Link
-                  href="/currency/250-dollars-in-rupees"
+                  href="/convert-usd-to-inr/250"
                   className="flex items-center gap-2 text-sm text-muted-foreground hover:text-trust-primary transition-colors"
                 >
                   <LucideIcon name="calculator" className="h-4 w-4" />

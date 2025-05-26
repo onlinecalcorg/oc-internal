@@ -313,6 +313,134 @@ export default function HomePage() {
         </div>
       </section>
 
+      {/* Academic Calculators Section */}
+      <section className="container px-4 py-12 md:py-16 md:px-6">
+        <div className="flex flex-col items-start justify-between gap-4 md:flex-row md:items-center">
+          <div>
+            <Badge className="mb-2">Academic Tools</Badge>
+            <h2 className="text-2xl font-bold tracking-tight md:text-3xl">Academic Calculators</h2>
+            <p className="text-muted-foreground">Essential tools for students and educators</p>
+          </div>
+          <Link href="/calculators?category=education">
+            <Button variant="outline" className="gap-1">
+              View All Academic Tools
+              <ArrowRight className="h-4 w-4" />
+            </Button>
+          </Link>
+        </div>
+        <div className="mt-8 grid gap-6 md:grid-cols-3">
+          <Link href="/cgpa-to-percentage" className="group">
+            <Card className="h-full overflow-hidden transition-all hover:border-trust-primary/50 hover:shadow-md">
+              <CardHeader className="p-4 pb-0">
+                <div className="flex items-start justify-between">
+                  <div className="rounded-full bg-trust-primary/10 p-2.5">
+                    <LucideIcon name="calculator" className="h-5 w-5 text-trust-primary" />
+                  </div>
+                  <Badge variant="outline" className="bg-trust-primary/5 text-trust-primary">
+                    Popular
+                  </Badge>
+                </div>
+              </CardHeader>
+              <CardContent className="p-4 pt-4">
+                <CardTitle className="line-clamp-1 text-xl">CGPA to Percentage</CardTitle>
+                <CardDescription className="line-clamp-2 mt-2 min-h-[40px]">
+                  Convert your CGPA to percentage instantly with accurate results for all grading scales
+                </CardDescription>
+              </CardContent>
+              <CardFooter className="p-4 pt-0">
+                <div className="flex w-full items-center justify-between">
+                  <Badge variant="outline" className="text-xs">
+                    Academic
+                  </Badge>
+                  <span className="text-sm font-medium text-trust-primary group-hover:underline">Try Calculator</span>
+                </div>
+              </CardFooter>
+            </Card>
+          </Link>
+
+          <Link href="/gpa-calculator" className="group">
+            <Card className="h-full overflow-hidden transition-all hover:border-trust-primary/50 hover:shadow-md">
+              <CardHeader className="p-4 pb-0">
+                <div className="flex items-start justify-between">
+                  <div className="rounded-full bg-trust-primary/10 p-2.5">
+                    <LucideIcon name="graduation-cap" className="h-5 w-5 text-trust-primary" />
+                  </div>
+                </div>
+              </CardHeader>
+              <CardContent className="p-4 pt-4">
+                <CardTitle className="line-clamp-1 text-xl">GPA Calculator</CardTitle>
+                <CardDescription className="line-clamp-2 mt-2 min-h-[40px]">
+                  Calculate your Grade Point Average with our comprehensive GPA calculator tool
+                </CardDescription>
+              </CardContent>
+              <CardFooter className="p-4 pt-0">
+                <div className="flex w-full items-center justify-between">
+                  <Badge variant="outline" className="text-xs">
+                    Academic
+                  </Badge>
+                  <span className="text-sm font-medium text-trust-primary group-hover:underline">Try Calculator</span>
+                </div>
+              </CardFooter>
+            </Card>
+          </Link>
+
+          <Link href="/grade-calculator" className="group">
+            <Card className="h-full overflow-hidden transition-all hover:border-trust-primary/50 hover:shadow-md">
+              <CardHeader className="p-4 pb-0">
+                <div className="flex items-start justify-between">
+                  <div className="rounded-full bg-trust-primary/10 p-2.5">
+                    <LucideIcon name="book-open" className="h-5 w-5 text-trust-primary" />
+                  </div>
+                </div>
+              </CardHeader>
+              <CardContent className="p-4 pt-4">
+                <CardTitle className="line-clamp-1 text-xl">Grade Calculator</CardTitle>
+                <CardDescription className="line-clamp-2 mt-2 min-h-[40px]">
+                  Calculate final grades, required scores, and track your academic progress
+                </CardDescription>
+              </CardContent>
+              <CardFooter className="p-4 pt-0">
+                <div className="flex w-full items-center justify-between">
+                  <Badge variant="outline" className="text-xs">
+                    Academic
+                  </Badge>
+                  <span className="text-sm font-medium text-trust-primary group-hover:underline">Try Calculator</span>
+                </div>
+              </CardFooter>
+            </Card>
+          </Link>
+        </div>
+
+        {/* Popular CGPA Conversions */}
+        <div className="mt-12">
+          <div className="mb-6 text-center">
+            <h3 className="mb-2 text-xl font-bold">Popular CGPA Conversions</h3>
+            <p className="text-muted-foreground">Quick access to commonly searched CGPA values</p>
+          </div>
+          <div className="grid gap-4 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-6">
+            {[
+              { cgpa: 9.5, percentage: 90.25 },
+              { cgpa: 9.0, percentage: 85.5 },
+              { cgpa: 8.5, percentage: 80.75 },
+              { cgpa: 8.0, percentage: 76.0 },
+              { cgpa: 7.5, percentage: 71.25 },
+              { cgpa: 7.38, percentage: 70.11 },
+              { cgpa: 7.0, percentage: 66.5 },
+              { cgpa: 6.5, percentage: 61.75 },
+            ].map((item) => (
+              <Link
+                key={item.cgpa}
+                href={`/cgpa-to-percentage/${item.cgpa}`}
+                className="group flex flex-col items-center justify-center rounded-lg border bg-card p-4 shadow-sm transition-all hover:border-trust-primary/50 hover:shadow-md"
+              >
+                <span className="text-lg font-medium text-trust-primary">{item.cgpa} CGPA</span>
+                <div className="mt-1 text-sm text-muted-foreground">{item.percentage}%</div>
+              </Link>
+            ))}
+          </div>
+        </div>
+      </section>
+
       {/* Common Decimal to Fraction Conversions */}
       <section className="container px-4 py-12 md:px-6">
         <div className="flex flex-col items-start justify-between gap-4 md:flex-row md:items-center">

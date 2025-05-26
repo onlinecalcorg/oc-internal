@@ -151,6 +151,30 @@ export function Footer() {
           <div className="space-y-4">
             <h3 className="text-sm font-semibold uppercase tracking-wider text-trust-primary">Featured Calculators</h3>
             <ul className="space-y-3">
+              <li>
+                <Link
+                  href="/cgpa-to-percentage"
+                  className="text-sm text-muted-foreground hover:text-trust-primary transition-colors"
+                >
+                  CGPA to Percentage
+                </Link>
+              </li>
+              <li>
+                <Link
+                  href="/cgpa-to-percentage/7.38"
+                  className="text-sm text-muted-foreground hover:text-trust-primary transition-colors"
+                >
+                  7.38 CGPA to Percentage
+                </Link>
+              </li>
+              <li>
+                <Link
+                  href="/cgpa-to-percentage/8.5"
+                  className="text-sm text-muted-foreground hover:text-trust-primary transition-colors"
+                >
+                  8.5 CGPA to Percentage
+                </Link>
+              </li>
               {calculatorCategories
                 .flatMap((category) =>
                   category.calculators.slice(0, 2).map((calculator) => (
@@ -164,7 +188,7 @@ export function Footer() {
                     </li>
                   )),
                 )
-                .slice(0, 8)}
+                .slice(0, 5)}
             </ul>
           </div>
 

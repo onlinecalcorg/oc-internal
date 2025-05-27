@@ -101,45 +101,56 @@ export default function HomePage() {
   return (
     <div className="flex flex-col min-h-screen">
       {/* Hero Section with Animated Background */}
-      <AnimatedGradientBackground className="py-16 md:py-24">
-        <section className="container px-4 md:px-6">
-          <div className="flex flex-col items-center space-y-4 text-center">
-            <Badge className="px-3.5 py-1.5 text-sm font-medium" variant="secondary">
-              100+ Free Online Calculators
-            </Badge>
-            <h1 className="text-3xl font-bold tracking-tighter sm:text-4xl md:text-5xl lg:text-6xl/none">
-              Calculate <span className="text-trust-primary">Anything</span>, Anywhere
-            </h1>
-            <p className="mx-auto max-w-[700px] text-muted-foreground md:text-xl">
-              Precise calculations for every aspect of your life - from finances and health to math and technology.
-            </p>
-            <div className="flex flex-col gap-3 sm:flex-row mt-2">
-              <Link href="/calculators">
-                <Button size="lg" className="gap-1.5 w-full sm:w-auto">
-                  Explore All Calculators
-                  <ArrowRight className="h-4 w-4" />
-                </Button>
-              </Link>
-              <div className="relative w-full sm:w-auto">
-                <form action="/search" className="w-full">
-                  <div className="relative">
-                    <Search className="absolute left-3 top-1/2 h-4 w-4 -translate-y-1/2 text-muted-foreground" />
-                    <input
-                      type="search"
-                      placeholder="Search calculators..."
-                      className="h-10 w-full rounded-md border border-input bg-background pl-10 pr-12 py-2 text-sm ring-offset-background file:border-0 file:bg-transparent file:text-sm file:font-medium placeholder:text-muted-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:cursor-not-allowed disabled:opacity-50 sm:w-[260px]"
-                      name="q"
-                    />
-                    <kbd className="pointer-events-none absolute right-3 top-1/2 -translate-y-1/2 rounded border bg-muted px-1.5 font-mono text-[10px] text-muted-foreground opacity-100">
-                      ⌘K
-                    </kbd>
-                  </div>
-                </form>
+      <section className="relative py-16 md:py-24 overflow-hidden">
+        <div className="absolute inset-0 z-0">
+          <Image
+            src="/images/hero-background.png"
+            alt="Calculator tools background"
+            fill
+            className="object-cover opacity-10"
+            priority
+          />
+        </div>
+        <AnimatedGradientBackground className="relative z-10">
+          <div className="container px-4 md:px-6">
+            <div className="flex flex-col items-center space-y-4 text-center">
+              <Badge className="px-3.5 py-1.5 text-sm font-medium" variant="secondary">
+                100+ Free Online Calculators
+              </Badge>
+              <h1 className="text-3xl font-bold tracking-tighter sm:text-4xl md:text-5xl lg:text-6xl/none">
+                Calculate <span className="text-trust-primary">Anything</span>, Anywhere
+              </h1>
+              <p className="mx-auto max-w-[700px] text-muted-foreground md:text-xl">
+                Precise calculations for every aspect of your life - from finances and health to math and technology.
+              </p>
+              <div className="flex flex-col gap-3 sm:flex-row mt-2">
+                <Link href="/calculators">
+                  <Button size="lg" className="gap-1.5 w-full sm:w-auto">
+                    Explore All Calculators
+                    <ArrowRight className="h-4 w-4" />
+                  </Button>
+                </Link>
+                <div className="relative w-full sm:w-auto">
+                  <form action="/search" className="w-full">
+                    <div className="relative">
+                      <Search className="absolute left-3 top-1/2 h-4 w-4 -translate-y-1/2 text-muted-foreground" />
+                      <input
+                        type="search"
+                        placeholder="Search calculators..."
+                        className="h-10 w-full rounded-md border border-input bg-background pl-10 pr-12 py-2 text-sm ring-offset-background file:border-0 file:bg-transparent file:text-sm file:font-medium placeholder:text-muted-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:cursor-not-allowed disabled:opacity-50 sm:w-[260px]"
+                        name="q"
+                      />
+                      <kbd className="pointer-events-none absolute right-3 top-1/2 -translate-y-1/2 rounded border bg-muted px-1.5 font-mono text-[10px] text-muted-foreground opacity-100">
+                        ⌘K
+                      </kbd>
+                    </div>
+                  </form>
+                </div>
               </div>
             </div>
           </div>
-        </section>
-      </AnimatedGradientBackground>
+        </AnimatedGradientBackground>
+      </section>
 
       {/* Stats Section */}
       <section className="border-y bg-muted/30">
@@ -213,9 +224,17 @@ export default function HomePage() {
         </div>
       </section>
 
-      {/* Categories Section with Tabs */}
-      <section className="bg-muted/30 py-12 md:py-16">
-        <div className="container px-4 md:px-6">
+      {/* Categories Section with Tabs and Images */}
+      <section className="relative bg-muted/30 py-12 md:py-16 overflow-hidden">
+        <div className="absolute inset-0 z-0">
+          <Image
+            src="/images/categories-overview.png"
+            alt="Calculator categories overview"
+            fill
+            className="object-cover opacity-5"
+          />
+        </div>
+        <div className="container px-4 md:px-6 relative z-10">
           <div className="flex flex-col items-center justify-center space-y-4 text-center">
             <Badge className="px-3.5 py-1.5 text-sm font-medium" variant="secondary">
               Browse by Category
@@ -239,10 +258,12 @@ export default function HomePage() {
                 </TabsTrigger>
               ))}
             </TabsList>
-            {calculatorCategories.slice(0, 4).map((category) => (
-              <TabsContent key={category.slug} value={category.slug} className="mt-6">
-                <div className="grid gap-4 sm:grid-cols-2 md:grid-cols-3">
-                  {category.calculators.map((calculator) => (
+
+            {/* Financial Tab with Image */}
+            <TabsContent value="financial" className="mt-6">
+              <div className="grid gap-8 lg:grid-cols-2 lg:gap-12">
+                <div className="grid gap-4 sm:grid-cols-2">
+                  {calculatorCategories[0].calculators.map((calculator) => (
                     <Link key={calculator.slug} href={`/calculators/${calculator.slug}`}>
                       <Card className="h-full transition-all hover:border-trust-primary/50 hover:shadow-md">
                         <CardHeader className="p-4 pb-2">
@@ -258,16 +279,149 @@ export default function HomePage() {
                     </Link>
                   ))}
                 </div>
-                <div className="mt-6 text-center">
-                  <Link href={`/calculators?category=${category.slug}`}>
-                    <Button variant="outline" className="gap-1">
-                      View All {category.title}
-                      <ArrowRight className="h-4 w-4" />
-                    </Button>
-                  </Link>
+                <div className="flex items-center justify-center">
+                  <div className="relative h-[300px] w-full max-w-[400px] overflow-hidden rounded-lg shadow-lg">
+                    <Image
+                      src="/images/financial-planning.png"
+                      alt="Financial planning calculators"
+                      fill
+                      className="object-cover"
+                    />
+                  </div>
                 </div>
-              </TabsContent>
-            ))}
+              </div>
+              <div className="mt-6 text-center">
+                <Link href={`/calculators?category=financial`}>
+                  <Button variant="outline" className="gap-1">
+                    View All Financial Calculators
+                    <ArrowRight className="h-4 w-4" />
+                  </Button>
+                </Link>
+              </div>
+            </TabsContent>
+
+            {/* Health Tab with Image */}
+            <TabsContent value="health" className="mt-6">
+              <div className="grid gap-8 lg:grid-cols-2 lg:gap-12">
+                <div className="grid gap-4 sm:grid-cols-2">
+                  {calculatorCategories[1].calculators.map((calculator) => (
+                    <Link key={calculator.slug} href={`/calculators/${calculator.slug}`}>
+                      <Card className="h-full transition-all hover:border-trust-primary/50 hover:shadow-md">
+                        <CardHeader className="p-4 pb-2">
+                          <div className="mb-2 w-fit rounded-full bg-trust-primary/10 p-2">
+                            <LucideIcon name={calculator.icon} className="h-4 w-4 text-trust-primary" />
+                          </div>
+                          <CardTitle className="text-lg">{calculator.title}</CardTitle>
+                        </CardHeader>
+                        <CardContent className="p-4 pt-0">
+                          <CardDescription className="line-clamp-2">{calculator.description}</CardDescription>
+                        </CardContent>
+                      </Card>
+                    </Link>
+                  ))}
+                </div>
+                <div className="flex items-center justify-center">
+                  <div className="relative h-[300px] w-full max-w-[400px] overflow-hidden rounded-lg shadow-lg">
+                    <Image
+                      src="/images/health-wellness.png"
+                      alt="Health and wellness calculators"
+                      fill
+                      className="object-cover"
+                    />
+                  </div>
+                </div>
+              </div>
+              <div className="mt-6 text-center">
+                <Link href={`/calculators?category=health`}>
+                  <Button variant="outline" className="gap-1">
+                    View All Health Calculators
+                    <ArrowRight className="h-4 w-4" />
+                  </Button>
+                </Link>
+              </div>
+            </TabsContent>
+
+            {/* Sustainability Tab with Image */}
+            <TabsContent value="sustainability" className="mt-6">
+              <div className="grid gap-8 lg:grid-cols-2 lg:gap-12">
+                <div className="grid gap-4 sm:grid-cols-2">
+                  {calculatorCategories[2].calculators.map((calculator) => (
+                    <Link key={calculator.slug} href={`/calculators/${calculator.slug}`}>
+                      <Card className="h-full transition-all hover:border-trust-primary/50 hover:shadow-md">
+                        <CardHeader className="p-4 pb-2">
+                          <div className="mb-2 w-fit rounded-full bg-trust-primary/10 p-2">
+                            <LucideIcon name={calculator.icon} className="h-4 w-4 text-trust-primary" />
+                          </div>
+                          <CardTitle className="text-lg">{calculator.title}</CardTitle>
+                        </CardHeader>
+                        <CardContent className="p-4 pt-0">
+                          <CardDescription className="line-clamp-2">{calculator.description}</CardDescription>
+                        </CardContent>
+                      </Card>
+                    </Link>
+                  ))}
+                </div>
+                <div className="flex items-center justify-center">
+                  <div className="relative h-[300px] w-full max-w-[400px] overflow-hidden rounded-lg shadow-lg">
+                    <Image
+                      src="/images/sustainability-tools.png"
+                      alt="Sustainability calculators"
+                      fill
+                      className="object-cover"
+                    />
+                  </div>
+                </div>
+              </div>
+              <div className="mt-6 text-center">
+                <Link href={`/calculators?category=sustainability`}>
+                  <Button variant="outline" className="gap-1">
+                    View All Sustainability Calculators
+                    <ArrowRight className="h-4 w-4" />
+                  </Button>
+                </Link>
+              </div>
+            </TabsContent>
+
+            {/* Technology Tab with Image */}
+            <TabsContent value="technology" className="mt-6">
+              <div className="grid gap-8 lg:grid-cols-2 lg:gap-12">
+                <div className="grid gap-4 sm:grid-cols-2">
+                  {calculatorCategories[3].calculators.map((calculator) => (
+                    <Link key={calculator.slug} href={`/calculators/${calculator.slug}`}>
+                      <Card className="h-full transition-all hover:border-trust-primary/50 hover:shadow-md">
+                        <CardHeader className="p-4 pb-2">
+                          <div className="mb-2 w-fit rounded-full bg-trust-primary/10 p-2">
+                            <LucideIcon name={calculator.icon} className="h-4 w-4 text-trust-primary" />
+                          </div>
+                          <CardTitle className="text-lg">{calculator.title}</CardTitle>
+                        </CardHeader>
+                        <CardContent className="p-4 pt-0">
+                          <CardDescription className="line-clamp-2">{calculator.description}</CardDescription>
+                        </CardContent>
+                      </Card>
+                    </Link>
+                  ))}
+                </div>
+                <div className="flex items-center justify-center">
+                  <div className="relative h-[300px] w-full max-w-[400px] overflow-hidden rounded-lg shadow-lg">
+                    <Image
+                      src="/images/technology-calculators.png"
+                      alt="Technology calculators"
+                      fill
+                      className="object-cover"
+                    />
+                  </div>
+                </div>
+              </div>
+              <div className="mt-6 text-center">
+                <Link href={`/calculators?category=technology`}>
+                  <Button variant="outline" className="gap-1">
+                    View All Technology Calculators
+                    <ArrowRight className="h-4 w-4" />
+                  </Button>
+                </Link>
+              </div>
+            </TabsContent>
           </Tabs>
         </div>
       </section>
@@ -313,102 +467,95 @@ export default function HomePage() {
         </div>
       </section>
 
-      {/* Academic Calculators Section */}
+      {/* Academic Calculators Section with Image */}
       <section className="container px-4 py-12 md:py-16 md:px-6">
-        <div className="flex flex-col items-start justify-between gap-4 md:flex-row md:items-center">
+        <div className="grid gap-8 lg:grid-cols-2 lg:gap-12">
           <div>
-            <Badge className="mb-2">Academic Tools</Badge>
-            <h2 className="text-2xl font-bold tracking-tight md:text-3xl">Academic Calculators</h2>
-            <p className="text-muted-foreground">Essential tools for students and educators</p>
+            <div className="flex flex-col items-start justify-between gap-4">
+              <div>
+                <Badge className="mb-2">Academic Tools</Badge>
+                <h2 className="text-2xl font-bold tracking-tight md:text-3xl">Academic Calculators</h2>
+                <p className="text-muted-foreground">Essential tools for students and educators</p>
+              </div>
+            </div>
+            <div className="mt-8 grid gap-6">
+              <Link href="/cgpa-to-percentage" className="group">
+                <Card className="h-full overflow-hidden transition-all hover:border-trust-primary/50 hover:shadow-md">
+                  <CardHeader className="p-4 pb-0">
+                    <div className="flex items-start justify-between">
+                      <div className="rounded-full bg-trust-primary/10 p-2.5">
+                        <LucideIcon name="calculator" className="h-5 w-5 text-trust-primary" />
+                      </div>
+                      <Badge variant="outline" className="bg-trust-primary/5 text-trust-primary">
+                        Popular
+                      </Badge>
+                    </div>
+                  </CardHeader>
+                  <CardContent className="p-4 pt-4">
+                    <CardTitle className="line-clamp-1 text-xl">CGPA to Percentage</CardTitle>
+                    <CardDescription className="line-clamp-2 mt-2 min-h-[40px]">
+                      Convert your CGPA to percentage instantly with accurate results for all grading scales
+                    </CardDescription>
+                  </CardContent>
+                  <CardFooter className="p-4 pt-0">
+                    <div className="flex w-full items-center justify-between">
+                      <Badge variant="outline" className="text-xs">
+                        Academic
+                      </Badge>
+                      <span className="text-sm font-medium text-trust-primary group-hover:underline">
+                        Try Calculator
+                      </span>
+                    </div>
+                  </CardFooter>
+                </Card>
+              </Link>
+
+              <div className="grid gap-4 sm:grid-cols-2">
+                <Link href="/gpa-calculator" className="group">
+                  <Card className="h-full overflow-hidden transition-all hover:border-trust-primary/50 hover:shadow-md">
+                    <CardHeader className="p-4 pb-0">
+                      <div className="rounded-full bg-trust-primary/10 p-2.5">
+                        <LucideIcon name="graduation-cap" className="h-5 w-5 text-trust-primary" />
+                      </div>
+                    </CardHeader>
+                    <CardContent className="p-4 pt-4">
+                      <CardTitle className="line-clamp-1 text-lg">GPA Calculator</CardTitle>
+                      <CardDescription className="line-clamp-2 mt-2 text-sm">
+                        Calculate your Grade Point Average
+                      </CardDescription>
+                    </CardContent>
+                  </Card>
+                </Link>
+
+                <Link href="/grade-calculator" className="group">
+                  <Card className="h-full overflow-hidden transition-all hover:border-trust-primary/50 hover:shadow-md">
+                    <CardHeader className="p-4 pb-0">
+                      <div className="rounded-full bg-trust-primary/10 p-2.5">
+                        <LucideIcon name="book-open" className="h-5 w-5 text-trust-primary" />
+                      </div>
+                    </CardHeader>
+                    <CardContent className="p-4 pt-4">
+                      <CardTitle className="line-clamp-1 text-lg">Grade Calculator</CardTitle>
+                      <CardDescription className="line-clamp-2 mt-2 text-sm">
+                        Calculate final grades and scores
+                      </CardDescription>
+                    </CardContent>
+                  </Card>
+                </Link>
+              </div>
+            </div>
           </div>
-          <Link href="/calculators?category=education">
-            <Button variant="outline" className="gap-1">
-              View All Academic Tools
-              <ArrowRight className="h-4 w-4" />
-            </Button>
-          </Link>
-        </div>
-        <div className="mt-8 grid gap-6 md:grid-cols-3">
-          <Link href="/cgpa-to-percentage" className="group">
-            <Card className="h-full overflow-hidden transition-all hover:border-trust-primary/50 hover:shadow-md">
-              <CardHeader className="p-4 pb-0">
-                <div className="flex items-start justify-between">
-                  <div className="rounded-full bg-trust-primary/10 p-2.5">
-                    <LucideIcon name="calculator" className="h-5 w-5 text-trust-primary" />
-                  </div>
-                  <Badge variant="outline" className="bg-trust-primary/5 text-trust-primary">
-                    Popular
-                  </Badge>
-                </div>
-              </CardHeader>
-              <CardContent className="p-4 pt-4">
-                <CardTitle className="line-clamp-1 text-xl">CGPA to Percentage</CardTitle>
-                <CardDescription className="line-clamp-2 mt-2 min-h-[40px]">
-                  Convert your CGPA to percentage instantly with accurate results for all grading scales
-                </CardDescription>
-              </CardContent>
-              <CardFooter className="p-4 pt-0">
-                <div className="flex w-full items-center justify-between">
-                  <Badge variant="outline" className="text-xs">
-                    Academic
-                  </Badge>
-                  <span className="text-sm font-medium text-trust-primary group-hover:underline">Try Calculator</span>
-                </div>
-              </CardFooter>
-            </Card>
-          </Link>
 
-          <Link href="/gpa-calculator" className="group">
-            <Card className="h-full overflow-hidden transition-all hover:border-trust-primary/50 hover:shadow-md">
-              <CardHeader className="p-4 pb-0">
-                <div className="flex items-start justify-between">
-                  <div className="rounded-full bg-trust-primary/10 p-2.5">
-                    <LucideIcon name="graduation-cap" className="h-5 w-5 text-trust-primary" />
-                  </div>
-                </div>
-              </CardHeader>
-              <CardContent className="p-4 pt-4">
-                <CardTitle className="line-clamp-1 text-xl">GPA Calculator</CardTitle>
-                <CardDescription className="line-clamp-2 mt-2 min-h-[40px]">
-                  Calculate your Grade Point Average with our comprehensive GPA calculator tool
-                </CardDescription>
-              </CardContent>
-              <CardFooter className="p-4 pt-0">
-                <div className="flex w-full items-center justify-between">
-                  <Badge variant="outline" className="text-xs">
-                    Academic
-                  </Badge>
-                  <span className="text-sm font-medium text-trust-primary group-hover:underline">Try Calculator</span>
-                </div>
-              </CardFooter>
-            </Card>
-          </Link>
-
-          <Link href="/grade-calculator" className="group">
-            <Card className="h-full overflow-hidden transition-all hover:border-trust-primary/50 hover:shadow-md">
-              <CardHeader className="p-4 pb-0">
-                <div className="flex items-start justify-between">
-                  <div className="rounded-full bg-trust-primary/10 p-2.5">
-                    <LucideIcon name="book-open" className="h-5 w-5 text-trust-primary" />
-                  </div>
-                </div>
-              </CardHeader>
-              <CardContent className="p-4 pt-4">
-                <CardTitle className="line-clamp-1 text-xl">Grade Calculator</CardTitle>
-                <CardDescription className="line-clamp-2 mt-2 min-h-[40px]">
-                  Calculate final grades, required scores, and track your academic progress
-                </CardDescription>
-              </CardContent>
-              <CardFooter className="p-4 pt-0">
-                <div className="flex w-full items-center justify-between">
-                  <Badge variant="outline" className="text-xs">
-                    Academic
-                  </Badge>
-                  <span className="text-sm font-medium text-trust-primary group-hover:underline">Try Calculator</span>
-                </div>
-              </CardFooter>
-            </Card>
-          </Link>
+          <div className="flex items-center justify-center">
+            <div className="relative h-[400px] w-full max-w-[500px] overflow-hidden rounded-lg shadow-lg">
+              <Image
+                src="/images/academic-tools.png"
+                alt="Academic calculator tools interface"
+                fill
+                className="object-cover"
+              />
+            </div>
+          </div>
         </div>
 
         {/* Popular CGPA Conversions */}
@@ -490,9 +637,17 @@ export default function HomePage() {
         </div>
       </section>
 
-      {/* Benefits Section */}
-      <section className="bg-trust-primary text-white">
-        <div className="container px-4 py-12 md:py-16 md:px-6">
+      {/* Benefits Section with Enhanced Visuals */}
+      <section className="relative bg-trust-primary text-white overflow-hidden">
+        <div className="absolute inset-0 z-0">
+          <Image
+            src="/images/precision-accuracy.png"
+            alt="Precision and accuracy visualization"
+            fill
+            className="object-cover opacity-10"
+          />
+        </div>
+        <div className="container px-4 py-12 md:py-16 md:px-6 relative z-10">
           <div className="grid gap-8 md:grid-cols-2">
             <div className="flex flex-col justify-center space-y-4">
               <Badge className="w-fit border-white/20 bg-white/10 text-white hover:bg-white/20">Why Choose Us</Badge>
@@ -554,51 +709,61 @@ export default function HomePage() {
         </div>
       </section>
 
-      {/* Testimonials Section */}
-      <section className="container px-4 py-12 md:py-16 md:px-6">
-        <div className="flex flex-col items-center justify-center space-y-4 text-center">
-          <Badge className="px-3.5 py-1.5 text-sm font-medium" variant="secondary">
-            Testimonials
-          </Badge>
-          <h2 className="text-2xl font-bold tracking-tight md:text-3xl">What Our Users Say</h2>
-          <p className="mx-auto max-w-[700px] text-muted-foreground">
-            Thousands of people use our calculators every day to make better decisions
-          </p>
+      {/* Testimonials Section with Background */}
+      <section className="relative container px-4 py-12 md:py-16 md:px-6 overflow-hidden">
+        <div className="absolute inset-0 z-0">
+          <Image
+            src="/images/testimonials-bg.png"
+            alt="User testimonials background"
+            fill
+            className="object-cover opacity-5"
+          />
         </div>
+        <div className="relative z-10">
+          <div className="flex flex-col items-center justify-center space-y-4 text-center">
+            <Badge className="px-3.5 py-1.5 text-sm font-medium" variant="secondary">
+              Testimonials
+            </Badge>
+            <h2 className="text-2xl font-bold tracking-tight md:text-3xl">What Our Users Say</h2>
+            <p className="mx-auto max-w-[700px] text-muted-foreground">
+              Thousands of people use our calculators every day to make better decisions
+            </p>
+          </div>
 
-        <div className="mt-8 grid gap-6 md:grid-cols-3">
-          {testimonials.map((testimonial, index) => (
-            <Card key={index} className="h-full">
-              <CardContent className="p-6">
-                <div className="mb-4 flex items-center">
-                  <div className="mr-4 flex h-10 w-10 items-center justify-center overflow-hidden rounded-full bg-muted">
-                    <Image
-                      src={testimonial.avatar || "/placeholder.svg"}
-                      alt={testimonial.author}
-                      width={60}
-                      height={60}
-                      className="h-full w-full object-cover"
-                    />
+          <div className="mt-8 grid gap-6 md:grid-cols-3">
+            {testimonials.map((testimonial, index) => (
+              <Card key={index} className="h-full">
+                <CardContent className="p-6">
+                  <div className="mb-4 flex items-center">
+                    <div className="mr-4 flex h-10 w-10 items-center justify-center overflow-hidden rounded-full bg-muted">
+                      <Image
+                        src={testimonial.avatar || "/placeholder.svg"}
+                        alt={testimonial.author}
+                        width={60}
+                        height={60}
+                        className="h-full w-full object-cover"
+                      />
+                    </div>
+                    <div>
+                      <p className="text-sm font-medium">{testimonial.author}</p>
+                      <p className="text-xs text-muted-foreground">{testimonial.role}</p>
+                    </div>
                   </div>
-                  <div>
-                    <p className="text-sm font-medium">{testimonial.author}</p>
-                    <p className="text-xs text-muted-foreground">{testimonial.role}</p>
+                  <div className="relative">
+                    <svg
+                      className="absolute -left-1 -top-2 h-6 w-6 text-muted-foreground/20"
+                      fill="currentColor"
+                      viewBox="0 0 32 32"
+                      aria-hidden="true"
+                    >
+                      <path d="M9.352 4C4.456 7.456 1 13.12 1 19.36c0 5.088 3.072 8.064 6.624 8.064 3.36 0 5.856-2.688 5.856-5.856 0-3.168-2.208-5.472-5.088-5.472-.576 0-1.344.096-1.536.192.48-3.264 3.552-7.104 6.624-9.024L9.352 4zm16.512 0c-4.8 3.456-8.256 9.12-8.256 15.36 0 5.088 3.072 8.064 6.624 8.064 3.264 0 5.856-2.688 5.856-5.856 0-3.168-2.304-5.472-5.184-5.472-.576 0-1.248.096-1.44.192.48-3.264 3.456-7.104 6.528-9.024L25.864 4z" />
+                    </svg>
+                    <p className="relative text-muted-foreground">{testimonial.quote}</p>
                   </div>
-                </div>
-                <div className="relative">
-                  <svg
-                    className="absolute -left-1 -top-2 h-6 w-6 text-muted-foreground/20"
-                    fill="currentColor"
-                    viewBox="0 0 32 32"
-                    aria-hidden="true"
-                  >
-                    <path d="M9.352 4C4.456 7.456 1 13.12 1 19.36c0 5.088 3.072 8.064 6.624 8.064 3.36 0 5.856-2.688 5.856-5.856 0-3.168-2.208-5.472-5.088-5.472-.576 0-1.344.096-1.536.192.48-3.264 3.552-7.104 6.624-9.024L9.352 4zm16.512 0c-4.8 3.456-8.256 9.12-8.256 15.36 0 5.088 3.072 8.064 6.624 8.064 3.264 0 5.856-2.688 5.856-5.856 0-3.168-2.304-5.472-5.184-5.472-.576 0-1.248.096-1.44.192.48-3.264 3.456-7.104 6.528-9.024L25.864 4z" />
-                  </svg>
-                  <p className="relative text-muted-foreground">{testimonial.quote}</p>
-                </div>
-              </CardContent>
-            </Card>
-          ))}
+                </CardContent>
+              </Card>
+            ))}
+          </div>
         </div>
       </section>
 
@@ -632,98 +797,120 @@ export default function HomePage() {
         </div>
       </section>
 
-      {/* Popular Unit Converters Section */}
+      {/* Popular Unit Converters Section with Image */}
       <section className="container px-4 py-12 md:py-16 md:px-6">
-        <div className="flex flex-col items-center justify-center space-y-4 text-center">
-          <Badge className="px-3.5 py-1.5 text-sm font-medium" variant="secondary">
-            Unit Converters
-          </Badge>
-          <h2 className="text-2xl font-bold tracking-tight md:text-3xl">Popular Unit Converters</h2>
-          <p className="mx-auto max-w-[700px] text-muted-foreground">
-            Quick access to our most frequently used unit conversion tools
-          </p>
-        </div>
+        <div className="grid gap-8 lg:grid-cols-2 lg:gap-12">
+          <div className="flex items-center justify-center order-2 lg:order-1">
+            <div className="relative h-[400px] w-full max-w-[500px] overflow-hidden rounded-lg shadow-lg">
+              <Image src="/images/unit-converter.png" alt="Unit converter interface" fill className="object-cover" />
+            </div>
+          </div>
 
-        <div className="mt-8 grid gap-6 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4">
-          {[
-            {
-              title: "Length Converter",
-              description: "Convert between meters, feet, inches, kilometers, miles, and more",
-              icon: "ruler",
-              slug: "convert/length",
-              popular: ["meter/to/foot", "kilometer/to/mile", "inch/to/centimeter"],
-            },
-            {
-              title: "Weight Converter",
-              description: "Convert between kilograms, pounds, ounces, grams, and more",
-              icon: "weight",
-              slug: "convert/weight",
-              popular: ["kilogram/to/pound", "gram/to/ounce", "pound/to/kilogram"],
-            },
-            {
-              title: "Temperature Converter",
-              description: "Convert between Celsius, Fahrenheit, and Kelvin temperature scales",
-              icon: "thermometer",
-              slug: "convert/temperature",
-              popular: ["celsius/to/fahrenheit", "fahrenheit/to/celsius", "celsius/to/kelvin"],
-            },
-            {
-              title: "Volume Converter",
-              description: "Convert between liters, gallons, cups, milliliters, and more",
-              icon: "flask",
-              slug: "convert/volume",
-              popular: ["liter/to/gallon", "milliliter/to/ounce", "cup/to/milliliter"],
-            },
-          ].map((converter) => (
-            <Card
-              key={converter.slug}
-              className="h-full overflow-hidden transition-all hover:border-trust-primary/50 hover:shadow-md"
-            >
-              <CardHeader className="p-4 pb-0">
-                <div className="flex items-start justify-between">
-                  <div className="rounded-full bg-trust-primary/10 p-2.5">
-                    <LucideIcon name={converter.icon} className="h-5 w-5 text-trust-primary" />
-                  </div>
-                </div>
-              </CardHeader>
-              <CardContent className="p-4 pt-4">
-                <CardTitle className="line-clamp-1 text-xl">{converter.title}</CardTitle>
-                <CardDescription className="line-clamp-2 mt-2 min-h-[40px]">{converter.description}</CardDescription>
-              </CardContent>
-              <CardFooter className="p-4 pt-0 flex flex-col items-start">
-                <div className="w-full mb-3">
-                  <div className="text-xs font-medium text-muted-foreground mb-2">Popular conversions:</div>
-                  <div className="space-y-1">
-                    {converter.popular.map((conversion) => (
-                      <Link
-                        key={conversion}
-                        href={`/${converter.slug}/${conversion}`}
-                        className="text-xs text-trust-primary hover:underline block"
-                      >
-                        {conversion.split("/to/").join(" to ").replace(/-/g, " ")}
-                      </Link>
-                    ))}
-                  </div>
-                </div>
-                <Link href={`/${converter.slug}`} className="text-sm font-medium text-trust-primary hover:underline">
-                  View all {converter.title.toLowerCase()} options
+          <div className="order-1 lg:order-2">
+            <div className="flex flex-col items-center justify-center space-y-4 text-center lg:text-left lg:items-start">
+              <Badge className="px-3.5 py-1.5 text-sm font-medium" variant="secondary">
+                Unit Converters
+              </Badge>
+              <h2 className="text-2xl font-bold tracking-tight md:text-3xl">Popular Unit Converters</h2>
+              <p className="max-w-[700px] text-muted-foreground">
+                Quick access to our most frequently used unit conversion tools
+              </p>
+            </div>
+
+            <div className="mt-8 grid gap-4 sm:grid-cols-2">
+              {[
+                {
+                  title: "Length Converter",
+                  description: "Convert between meters, feet, inches, kilometers, miles, and more",
+                  icon: "ruler",
+                  slug: "convert/length",
+                },
+                {
+                  title: "Weight Converter",
+                  description: "Convert between kilograms, pounds, ounces, grams, and more",
+                  icon: "weight",
+                  slug: "convert/weight",
+                },
+                {
+                  title: "Temperature Converter",
+                  description: "Convert between Celsius, Fahrenheit, and Kelvin temperature scales",
+                  icon: "thermometer",
+                  slug: "convert/temperature",
+                },
+                {
+                  title: "Volume Converter",
+                  description: "Convert between liters, gallons, cups, milliliters, and more",
+                  icon: "flask",
+                  slug: "convert/volume",
+                },
+              ].map((converter) => (
+                <Link key={converter.slug} href={`/${converter.slug}`}>
+                  <Card className="h-full overflow-hidden transition-all hover:border-trust-primary/50 hover:shadow-md">
+                    <CardHeader className="p-4 pb-0">
+                      <div className="rounded-full bg-trust-primary/10 p-2.5 w-fit">
+                        <LucideIcon name={converter.icon} className="h-5 w-5 text-trust-primary" />
+                      </div>
+                    </CardHeader>
+                    <CardContent className="p-4 pt-4">
+                      <CardTitle className="line-clamp-1 text-lg">{converter.title}</CardTitle>
+                      <CardDescription className="line-clamp-2 mt-2 text-sm">{converter.description}</CardDescription>
+                    </CardContent>
+                  </Card>
                 </Link>
-              </CardFooter>
-            </Card>
-          ))}
-        </div>
+              ))}
+            </div>
 
-        <div className="mt-8 text-center">
-          <Link href="/unit-converter">
-            <Button className="gap-1.5">
-              Explore All Unit Converters
-              <ArrowRight className="h-4 w-4" />
-            </Button>
-          </Link>
+            <div className="mt-8 text-center lg:text-left">
+              <Link href="/unit-converter">
+                <Button className="gap-1.5">
+                  Explore All Unit Converters
+                  <ArrowRight className="h-4 w-4" />
+                </Button>
+              </Link>
+            </div>
+          </div>
         </div>
       </section>
 
-      {/* CTA Section */}
+      {/* Mobile Experience Section */}
+      <section className="bg-muted/30 py-12 md:py-16">
+        <div className="container px-4 md:px-6">
+          <div className="grid gap-8 lg:grid-cols-2 lg:gap-12">
+            <div className="flex flex-col justify-center space-y-4">
+              <Badge className="w-fit">Mobile First</Badge>
+              <h2 className="text-2xl font-bold tracking-tight md:text-3xl">Perfect Experience on Every Device</h2>
+              <p className="text-muted-foreground md:text-lg">
+                Our calculators are designed mobile-first to ensure a seamless experience whether you're on your phone,
+                tablet, or desktop. Fast, responsive, and always accessible.
+              </p>
+              <div className="flex flex-col gap-4 pt-4 sm:flex-row">
+                <Link href="/calculators">
+                  <Button size="lg" className="w-full sm:w-auto">
+                    Try on Mobile
+                  </Button>
+                </Link>
+                <Link href="/about">
+                  <Button variant="outline" size="lg" className="w-full sm:w-auto">
+                    Learn More
+                  </Button>
+                </Link>
+              </div>
+            </div>
+            <div className="flex items-center justify-center">
+              <div className="relative h-[400px] w-full max-w-[300px] overflow-hidden rounded-lg shadow-lg">
+                <Image
+                  src="/images/mobile-calculator.png"
+                  alt="Mobile calculator interface"
+                  fill
+                  className="object-cover"
+                />
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* CTA Section with Image */}
       <section className="container px-4 py-12 md:py-16 md:px-6">
         <div className="relative overflow-hidden rounded-lg border bg-background p-8 shadow-lg md:p-12">
           <div className="absolute inset-0 bg-trust-primary/5" aria-hidden="true" />
@@ -751,7 +938,7 @@ export default function HomePage() {
             <div className="flex items-center justify-center">
               <div className="relative h-[240px] w-full max-w-[320px] overflow-hidden rounded-lg shadow-lg">
                 <Image
-                  src="/placeholder.svg?height=480&width=640"
+                  src="/images/calculator-dashboard.png"
                   alt="Calculator dashboard preview"
                   fill
                   className="object-cover"

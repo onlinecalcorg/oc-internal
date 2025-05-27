@@ -153,6 +153,15 @@ export function Footer() {
             <ul className="space-y-3">
               <li>
                 <Link
+                  href="/ai-calculator"
+                  className="flex items-center gap-2 text-sm text-muted-foreground hover:text-trust-primary transition-colors"
+                >
+                  <LucideIcon name="sparkles" className="h-4 w-4" />
+                  AI Calculator
+                </Link>
+              </li>
+              <li>
+                <Link
                   href="/cgpa-to-percentage"
                   className="text-sm text-muted-foreground hover:text-trust-primary transition-colors"
                 >
@@ -188,7 +197,7 @@ export function Footer() {
                     </li>
                   )),
                 )
-                .slice(0, 5)}
+                .slice(0, 4)}
             </ul>
           </div>
 
